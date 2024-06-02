@@ -3,8 +3,8 @@ class Erlang < Formula
   homepage "https://www.erlang.org/"
   # Download tarball from GitHub; it is served faster than the official tarball.
   # Don't forget to update the documentation resource along with the url!
-  url "https://github.com/erlang/otp/releases/download/OTP-26.2.5/otp_src_26.2.5.tar.gz"
-  sha256 "de155c4ad9baab2b9e6c96dbd03bf955575a04dd6feee9c08758beb28484c9f6"
+  url "https://github.com/erlang/otp/releases/download/OTP-27.0/otp_src_27.0.tar.gz"
+  sha256 "56412677466b756740fb2dbf4a8019e7c7cc38f01bd30c4cac5210214cafeef6"
   license "Apache-2.0"
 
   livecheck do
@@ -37,9 +37,9 @@ class Erlang < Formula
   uses_from_macos "libxslt" => :build
 
   resource "html" do
-    url "https://github.com/erlang/otp/releases/download/OTP-26.2.5/otp_doc_html_26.2.5.tar.gz"
-    mirror "https://fossies.org/linux/misc/otp_doc_html_26.2.5.tar.gz"
-    sha256 "7c9c99695f8b0218f655ec154954bac1d70e25fe3d54810cf81590e1eb711e47"
+    url "https://github.com/erlang/otp/releases/download/OTP-27.0/otp_doc_html_27.0.tar.gz"
+    mirror "https://fossies.org/linux/misc/otp_doc_html_27.0.tar.gz"
+    sha256 "69c926bbf1b3fed93f361317a481910dae98f9700f58765b36c4875044bcc9d7"
   end
 
   def install
@@ -73,8 +73,8 @@ class Erlang < Formula
     system "make", "install"
 
     # Build the doc chunks (manpages are also built by default)
-    ENV.deparallelize { system "make", "docs", "DOC_TARGETS=chunks" }
-    ENV.deparallelize { system "make", "install-docs" }
+    ENV.deparallelize { system "make", "docs", "DOC_TARGETS='man chunks'" }
+    ENV.deparallelize { system "make", "install-docs", "DOC_TARGETS='man chunks'" }
 
     doc.install resource("html")
   end
